@@ -1,0 +1,47 @@
+<aura:component
+                controller="AccountController"
+                implements="flexipage:availableForAllPageTypes"
+                access="global"
+                >
+    <aura:attribute name="mydata" type="Object" />
+    <aura:attribute name="accName" type="string" />
+    <aura:attribute name="draftValues" type="Object" default="[]"/>
+    <aura:attribute name="mycolumns" type="List" />
+    <aura:handler name="init" value="{! this }" action="{! c.doInit }" />
+    <div class="slds-card">
+        <div class="slds-card__header">
+            <div class="slds-media__figure"></div>
+            <div class="slds-grid slds-grid_vertical-align-center">
+                <p class="slds-text-heading_small">
+                    <lightning:icon
+                                    iconName="custom:custom83"
+                                    size="small"
+                                    alternativeText="Account Datatable"
+                                    title="Account Datatable"
+                                    />
+                </p>
+                <span
+                      class="slds-text-heading_small slds-col"
+                      style="padding-left: 4px"
+                      >
+                    Financial Services Account Listing
+                </span>
+                <span class="slds-col"> </span>
+            </div>
+        </div>
+        <div>
+            <lightning:input value="{!v.accName}" />
+            
+            <lightning:button label="Search" onclick="{!c.doSearch}" />
+        </div>
+        <lightning:datatable
+                             data="{! v.mydata }"
+                             columns="{! v.mycolumns }"
+                             keyField="id"
+                             draftValues="{! v.draftValues }"
+                             onsort="{!c.updateColumnSorting}"
+                             onsave="{! c.handleSaveEdition }"
+                             hideCheckboxColumn="true"
+                             />
+    </div>
+</aura:component>
